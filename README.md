@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/hwillson/meteor-dropbox-blogger.png?label=ready&title=Ready)](https://waffle.io/hwillson/meteor-dropbox-blogger)
 # meteor-dropbox-blogger
 
 [Meteor](https://meteor.com) based blogging system that leverages [Dropbox](https://dropbox.com) for content management.
