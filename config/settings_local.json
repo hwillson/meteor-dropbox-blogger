@@ -1,0 +1,13 @@
+{
+  "public": {
+    "site": {
+      "title": "Some Random Test Site"
+    }
+  },
+  "private": {
+    "dropbox": {
+      "token": "pq3bvP_iBL4AAAAAAAAGZNEG4DNTzMNw0bLwxgkOYe_XjdD4vGsCpGyfKNc5CTvv",
+      "pollIntervalMs": 5000
+    }
+  }
+}
