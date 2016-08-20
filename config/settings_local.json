@@ -6,7 +6,7 @@
   },
   "private": {
     "dropbox": {
-      "token": "pq3bvP_iBL4AAAAAAAAGZNEG4DNTzMNw0bLwxgkOYe_XjdD4vGsCpGyfKNc5CTvv",
+      "token": "",
       "pollIntervalMs": 5000
     }
   }

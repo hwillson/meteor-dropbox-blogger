@@ -46,7 +46,6 @@ const Header = ({ allFiles }) => (
 );
 
 Header.propTypes = {
-  siteTitle: React.PropTypes.string.isRequired,
   allFiles: React.PropTypes.array.isRequired,
 };
 

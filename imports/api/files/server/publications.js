@@ -17,7 +17,7 @@ Meteor.publish('files.all', function filesAll() {
     dropboxApi.filesListFolder({ path: '' }).then((response) => {
       if (response && response.entries) {
         response.entries.forEach((entry) => {
-          dropboxApi.filesDownload({ path: entry.path_lower }).then((file) => {
+          dropboxApi.filesDownload({ path: entry.path_display }).then((file) => {
             const filenameParts = file.name.split('__');
             let order = 0;
             let filename;
@@ -27,9 +27,12 @@ Meteor.publish('files.all', function filesAll() {
             } else {
               filename = filenameParts[0];
             }
-            const title =
-              s(filename.split('.')[0]).humanize().titleize().value();
-            const slug = s(title).dasherize().value().substring(1);
+            const fileTitle = filename.split('.')[0];
+            const title = fileTitle.replace('_', ' ');
+            let slug = s(fileTitle.toLowerCase()).dasherize().value();
+            if (slug.charAt(0) === '-') {
+              slug = slug.substring(1);
+            }
             const hidden = file.name.startsWith('_');
             const fileContent = {
               title,

@@ -1,14 +1,15 @@
 import React from 'react';
-import { Grid, Row } from 'react-bootstrap';
+
+function prepareContent(content) {
+  return {
+    __html: content,
+  };
+}
 
 const Footer = ({ content }) => (
-  <footer>
-    <Grid>
-      <Row>
-        {content}
-      </Row>
-    </Grid>
-  </footer>
+  <footer
+    dangerouslySetInnerHTML={prepareContent(content)}
+  />
 );
 
 Footer.propTypes = {
