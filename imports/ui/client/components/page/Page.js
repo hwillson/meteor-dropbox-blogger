@@ -1,4 +1,4 @@
-/* global document */
+/* global document, window */
 
 import React, { Component } from 'react';
 import FontAwesome from 'react-fontawesome';
@@ -14,6 +14,8 @@ class Page extends Component {
           $(event.currentTarget).next().slideToggle();
         };
       }
+      // Tell prerender we're ready for caching
+      window.prerenderReady = true;
     }
   }
 
@@ -21,19 +23,21 @@ class Page extends Component {
     let content;
     if (!this.props.page) {
       content = (
-        <div className="loading">
+        <div className="page loading">
           <FontAwesome name="refresh" spin /> Loading ...
         </div>
       );
     } else {
-      content = this.props.page.content;
+      content = (
+        <div
+          className="page"
+          dangerouslySetInnerHTML={
+            HtmlContent.prepareForDisplay(this.props.page.content)
+          }
+        />
+      );
     }
-    return (
-      <div
-        className="page"
-        dangerouslySetInnerHTML={HtmlContent.prepareForDisplay(content)}
-      />
-    );
+    return content;
   }
 }
 
