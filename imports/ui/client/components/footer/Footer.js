@@ -1,14 +1,9 @@
 import React from 'react';
-
-function prepareContent(content) {
-  return {
-    __html: content,
-  };
-}
+import HtmlContent from '../../helpers/html_content';
 
 const Footer = ({ content }) => (
   <footer
-    dangerouslySetInnerHTML={prepareContent(content)}
+    dangerouslySetInnerHTML={HtmlContent.prepareForDisplay(content)}
   />
 );
 

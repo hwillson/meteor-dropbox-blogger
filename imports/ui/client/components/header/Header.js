@@ -26,6 +26,20 @@ function renderNavItems(allFiles) {
   return navItems;
 }
 
+function renderNavigation(allFiles) {
+  let navigation;
+  if (allFiles.length) {
+    navigation = (
+      <Navbar className="navbar-dark">
+        <Nav>
+          {renderNavItems(allFiles)}
+        </Nav>
+      </Navbar>
+    );
+  }
+  return navigation;
+}
+
 const Header = ({ allFiles }) => (
   <header>
     <Grid>
@@ -37,11 +51,7 @@ const Header = ({ allFiles }) => (
         </Col>
       </Row>
     </Grid>
-    <Navbar className="navbar-dark">
-      <Nav>
-        {renderNavItems(allFiles)}
-      </Nav>
-    </Navbar>
+    {renderNavigation(allFiles)}
   </header>
 );
 

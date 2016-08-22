@@ -1,0 +1,104 @@
+.page
+  .loading
+    margin-top 20px
+
+  h1
+    font-size 2.3em
+    font-family Lato, sans-serif
+    font-weight 300
+    line-height 120%
+    color #0099da
+    margin 10px 0 10px
+  h2
+    padding-top 10px
+    font-weight 700
+    font-size 1.3em
+    font-family Lato, sans-serif
+    line-height 120%
+    color #0099da
+    margin 10px 0 17px
+
+  .table-bordered>tbody>tr>th,
+  .table-bordered>tbody>tr>td,
+  .table-bordered>thead>tr>th
+    border-color #333
+
+  .table>thead:first-child>tr:first-child>th
+    border-bottom none
+    border-top 1px solid #333
+
+  .table-info
+    margin-top 15px
+
+    ul
+      margin-top 10px
+    .table-callout
+      font-size 20px
+    .info-row1
+      th
+        text-align center
+        vertical-align middle
+        background-color #FFE599
+      td
+        background-color #FFF2CC
+    .info-row2
+      td
+        text-align center
+        background-color #E2EFD9
+    .info-row3
+      th
+        text-align center
+        vertical-align middle
+        background-color #B4C6E7
+      td
+        background-color #D9E2F2
+
+  .table-instructions
+    margin-top 15px
+
+    thead
+      th
+        background-color #D9E2F2
+        text-align center
+        width 25%
+    th
+      text-align center
+      vertical-align middle
+    .instructions-row1
+      th, td
+        background-color #E2EFD9
+        vertical-align middle
+    .instructions-row2
+      th, td
+        background-color #FBE4D5
+        vertical-align middle
+
+  .faq
+    margin-bottom 2px
+    transition all 0.5s
+    color #666
+    .faq-title
+      background-color #fafafa
+      border 1px solid #ddd
+      margin 0
+      height auto
+      cursor pointer
+      transition all 0.2s
+      padding 1em
+      font-weight bold
+      i
+        color #0099da
+      i.fa
+        margin-right 0.5em
+    .faq-content
+      padding 1.5em 1.5em 0.3em
+      margin 0
+      border 1px solid #ddd
+      display none
+  .faq.active .faq-title,
+  .faq .faq-title:hover
+    background-color #0099da
+    color #FFF
+  .faq.active .faq-title i,
+  .faq .faq-title:hover i
+    color #FFF
