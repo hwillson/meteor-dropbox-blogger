@@ -69,3 +69,17 @@ The following files are interpreted a bit differently than other site files:
 - **1__home.html** - Holds site homepage content. This file is mandatory.
 - **_sidebar.html** - Holds right hand sidebar content.
 - **_footer.html** - Holds footer content.
+
+## Prerender.io (SEO)
+
+Pre-rendering has been configured using the [dfischer:prerenderio](https://atmospherejs.com/dfischer/prerenderio) package, as well as [mdg:seo](https://atmospherejs.com/mdg/seo) if deploying to [Galaxy](http://meteor.com/hosting). To test pre-rendering locally:
+
+```
+git clone https://github.com/prerender/prerender.git
+cd prerender
+npm install
+export PORT=3500
+node server.js
+```
+
+then access your local app as: `http://localhost:3500/http://localhost:3000/home`

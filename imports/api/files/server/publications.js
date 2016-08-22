@@ -33,6 +33,7 @@ Meteor.publish('files.all', function filesAll() {
             if (slug.charAt(0) === '-') {
               slug = slug.substring(1);
             }
+            slug = slug.replace('?', '');
             const hidden = file.name.startsWith('_');
             const fileContent = {
               title,

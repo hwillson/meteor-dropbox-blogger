@@ -3,19 +3,32 @@
 import React, { Component } from 'react';
 import FontAwesome from 'react-fontawesome';
 import $ from 'jquery';
+import { browserHistory } from 'react-router';
 import HtmlContent from '../../helpers/html_content';
 
 class Page extends Component {
   componentDidUpdate() {
     if (this.props.page) {
+      // Setup toggling click events for toggle links
       const toggleLinks = document.getElementsByClassName('toggle-link');
       for (let i = 0; i < toggleLinks.length; i++) {
         toggleLinks[i].onclick = (event) => {
           $(event.currentTarget).next().slideToggle();
         };
       }
+
       // Tell prerender we're ready for caching
       window.prerenderReady = true;
+
+      // Adjust internal links to make sure they leverage the browser
+      // History API instead of doing a full page reload
+      const internalLinks = document.getElementsByClassName('internal-link');
+      for (let i = 0; i < internalLinks.length; i++) {
+        internalLinks[i].onclick = (event) => {
+          event.preventDefault();
+          browserHistory.push(event.target.pathname);
+        };
+      }
     }
   }
 
