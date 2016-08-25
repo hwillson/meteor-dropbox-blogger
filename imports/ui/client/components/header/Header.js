@@ -10,6 +10,14 @@ import {
 } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
+function pageTitle() {
+  return (
+    <a href="/">
+      <h1>{Meteor.settings.public.site.title}</h1>
+    </a>
+  );
+}
+
 function renderNavItems(allFiles) {
   const navItems = [];
   allFiles.forEach((page) => {
@@ -31,9 +39,17 @@ function renderNavigation(allFiles) {
   if (allFiles.length) {
     navigation = (
       <Navbar className="navbar-dark">
-        <Nav>
-          {renderNavItems(allFiles)}
-        </Nav>
+        <Navbar.Header className="hidden-sm hidden-md hidden-lg">
+          <Navbar.Brand>
+            {pageTitle()}
+          </Navbar.Brand>
+          <Navbar.Toggle />
+        </Navbar.Header>
+        <Navbar.Collapse>
+          <Nav>
+            {renderNavItems(allFiles)}
+          </Nav>
+        </Navbar.Collapse>
       </Navbar>
     );
   }
@@ -42,12 +58,10 @@ function renderNavigation(allFiles) {
 
 const Header = ({ allFiles }) => (
   <header>
-    <Grid>
+    <Grid className="hidden-xs">
       <Row>
         <Col md={12} className="header-title">
-          <a href="/">
-            <h1>{Meteor.settings.public.site.title}</h1>
-          </a>
+          {pageTitle()}
         </Col>
       </Row>
     </Grid>

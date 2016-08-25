@@ -6,7 +6,6 @@
   },
   "private": {
     "dropbox": {
-      "token": "",
       "pollIntervalMs": 5000
     }
   }

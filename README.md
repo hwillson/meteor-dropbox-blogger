@@ -19,7 +19,7 @@ You will need a configured [Dropbox API app](https://www.dropbox.com/developers/
 1. `git clone https://github.com/hwillson/meteor-dropbox-blogger.git`
 2. `cd meteor-dropbox-blogger; meteor npm install`
 3. Tweak any configuration items via `/config/settings_local.json`.
-4. Start the app: `meteor npm start`
+4. Start the app: `DROPBOX_TOKEN="yourtokenhere" meteor --settings=config/settings_local.json`
 
 ### Production
 

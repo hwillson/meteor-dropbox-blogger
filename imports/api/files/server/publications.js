@@ -7,8 +7,13 @@ import s from 'underscore.string';
 const COLLECTION_NAME = 'files';
 
 Meteor.publish('files.all', function filesAll() {
+  if (!process.env.DROPBOX_TOKEN) {
+    throw new Error(
+      'Uh oh - the DROPBOX_TOKEN environment variable is missing!');
+  }
+
   const dropboxApi = new Dropbox({
-    accessToken: Meteor.settings.private.dropbox.token,
+    accessToken: process.env.DROPBOX_TOKEN,
   });
 
   const publishedKeys = {};

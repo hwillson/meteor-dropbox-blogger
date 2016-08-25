@@ -2,6 +2,8 @@
   margin-top 20px
 
 .page
+  margin-bottom 40px
+  
   a
     color #0099da
     text-decoration none
@@ -61,48 +63,53 @@
     margin-top 15px
 
     thead
-      th
-        background-color #D9E2F2
+      th, td
         text-align center
-        width 25%
-    th
-      text-align center
-      vertical-align middle
-    .instructions-row1
-      th, td
-        background-color #E2EFD9
-        vertical-align middle
-    .instructions-row2
-      th, td
-        background-color #FBE4D5
-        vertical-align middle
+        font-size 16px
 
-  .faq
-    margin-bottom 2px
-    transition all 0.5s
-    color #666
-    .faq-title
-      background-color #fafafa
-      border 1px solid #ddd
-      margin 0
-      height auto
-      cursor pointer
-      transition all 0.2s
-      padding 1em
-      font-weight bold
-      i
-        color #0099da
-      i.fa
-        margin-right 0.5em
-    .faq-content
-      padding 1.5em 1.5em 0.3em
-      margin 0
-      border 1px solid #ddd
-      display none
-  .faq.active .faq-title,
-  .faq .faq-title:hover
-    background-color #0099da
-    color #FFF
-  .faq.active .faq-title i,
-  .faq .faq-title:hover i
-    color #FFF
+    .col1
+      background-color #D9E2F2
+      text-align center
+      width 20%
+      vertical-align middle
+      font-size 16px
+
+    .col2
+      background-color #E2EFD9
+      vertical-align middle
+      width 30%
+    .col3
+      background-color #FBE4D5
+      vertical-align middle
+      width 30%
+
+  .faqs
+    .faq
+      margin-bottom 2px
+      transition all 0.5s
+      color #666
+      .faq-title
+        background-color #fafafa
+        border 1px solid #ddd
+        margin 0
+        height auto
+        cursor pointer
+        transition all 0.2s
+        padding 1em
+        font-weight bold
+        i
+          color #0099da
+        i.fa
+          margin-right 0.5em
+      .faq-content
+        padding 1.5em 1.5em 0.3em
+        margin 0
+        border 1px solid #ddd
+        display none
+    .faq.active .faq-title,
+    .faq .faq-title:hover
+      background-color #0099da
+      color #FFF
+    .faq.active .faq-title i,
+    .faq .faq-title:hover i
+      color #FFF
