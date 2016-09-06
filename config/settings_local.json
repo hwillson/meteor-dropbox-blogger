@@ -1,12 +1,23 @@
 {
   "public": {
     "site": {
-      "title": "Some Random Test Site"
+      "languages": [
+        { "code": "en", "label": "English" },
+        { "code": "fr", "label": "French" }
+      ],
+      "title": {
+        "en": "Some Random Test Site [en]",
+        "fr": "Some Random Test Site [fr]"
+      },
+      "home": {
+        "en": "home",
+        "fr": "accueil"
+      }
     }
   },
   "private": {
     "dropbox": {
-      "pollIntervalMs": 5000
+      "pollIntervalMs": 60000
     }
   }
 }

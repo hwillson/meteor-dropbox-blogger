@@ -1,3 +1,5 @@
+/* global document, localStorage */
+
 import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import {
@@ -9,11 +11,16 @@ import {
   Col,
 } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+import LanguageDropdown from './LanguageDropdown';
 
 function pageTitle() {
+  const title =
+    Meteor.settings.public.site.title[localStorage.getItem('paxil_language')];
+  // Set page head title as well
+  document.title = title;
   return (
     <a href="/">
-      <h1>{Meteor.settings.public.site.title}</h1>
+      <h1>{title}</h1>
     </a>
   );
 }
@@ -49,6 +56,9 @@ function renderNavigation(allFiles) {
           <Nav>
             {renderNavItems(allFiles)}
           </Nav>
+          <div className="hidden-sm hidden-md hidden-lg">
+            <LanguageDropdown />
+          </div>
         </Navbar.Collapse>
       </Navbar>
     );
@@ -60,8 +70,11 @@ const Header = ({ allFiles }) => (
   <header>
     <Grid className="hidden-xs">
       <Row>
-        <Col md={12} className="header-title">
+        <Col md={10} className="header-title">
           {pageTitle()}
+        </Col>
+        <Col md={2}>
+          <LanguageDropdown />
         </Col>
       </Row>
     </Grid>

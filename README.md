@@ -33,12 +33,14 @@ Application configuration is controlled through `settings*.json` files, stored i
 {
   "public": {  
     "site": {
-      "title": "Awesome Site" [Your site title (shows in `head > title`)]
+      "title": "Awesome Site", [Your site title (shows in `head > title`)]
+      "languages": [
+        { "en": "English" } [Available languages]
+      ]
     }    
   },
   "private": {
     "dropbox": {
-      "token": "somelongrandomstring", [Your Dropbox API app access token]
       "pollIntervalMs": 5000 [Dropbox content change poll interval in milliseconds]
     }
   }
@@ -50,25 +52,25 @@ Application configuration is controlled through `settings*.json` files, stored i
 Content files stored in Dropbox should use the following format:
 
 ```
-order__page_title.html
+language_order__page_title.html
 ```
 
-The title portion of the filename is used in the sites top menu, as a menu item. The order portion of the filename is a number used to sort the page titles when displayed in the top menu. Underscores in the page title are converted into spaces when shown in the site menu, and page titles are capitalized.
+The title portion of the filename is used in the sites top menu, as a menu item. The order portion of the filename is a number used to sort the page titles when displayed in the top menu. Language should line up with one of the defined language codes in your `settings.json`.  Underscores in the page title are converted into spaces when shown in the site menu, and page titles are capitalized.
 
 Example:
 
 ```
-1__home.html       --> shown as "Home" in the first top menu location
-2__contact_us.html --> shown as "Contact Us" in the second top menu location
+en_1__home.html       --> shown as "Home" in the first top menu location
+en_2__contact_us.html --> shown as "Contact Us" in the second top menu location
 ```
 
 ### Special Files
 
 The following files are interpreted a bit differently than other site files:
 
-- **1__home.html** - Holds site homepage content. This file is mandatory.
-- **_sidebar.html** - Holds right hand sidebar content.
-- **_footer.html** - Holds footer content.
+- **`en_1__home.html`** - Holds site homepage content. This file is mandatory.
+- **`_en__sidebar.html`** - Holds right hand sidebar content (can have multiple files for different languages)
+- **`_en__footer.html`** - Holds footer content (can have multiple files for different languages).
 
 ## Prerender.io (SEO)
 
