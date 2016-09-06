@@ -26,6 +26,8 @@ Meteor.publish('files.all', function filesAll(currentLanguage) {
       if (response && response.entries) {
         response.entries.forEach((entry) => {
           dropboxApi.filesDownload({ path: entry.path_display }).then((file) => {
+            // TODO - this should be cleaned up by moving the file
+            // config/name extraction code into its own helper object.
             let order = 0;
             let language;
             let hidden = false;
