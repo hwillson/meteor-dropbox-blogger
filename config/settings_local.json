@@ -16,8 +16,6 @@
     }
   },
   "private": {
-    "dropbox": {
-      "pollIntervalMs": 60000
-    }
+    "cronEnabled": false
   }
 }

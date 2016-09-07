@@ -6,6 +6,7 @@
   },
   "dependencies": {
     "dropbox": "^2.1.0",
+    "hiredis": "^0.5.0",
     "jquery": "^3.1.0",
     "meteor-node-stubs": "~0.2.0",
     "react": "^15.3.0",
@@ -15,6 +16,7 @@
     "react-fontawesome": "^1.1.0",
     "react-router": "^2.6.1",
     "react-router-bootstrap": "^0.23.1",
+    "redis": "^2.6.2",
     "underscore.string": "^3.3.4"
   },
   "devDependencies": {

@@ -22,3 +22,5 @@ aldeed:collection2
 react-meteor-data
 mdg:seo
 dfischer:prerenderio
+mdg:validated-method
+percolate:synced-cron

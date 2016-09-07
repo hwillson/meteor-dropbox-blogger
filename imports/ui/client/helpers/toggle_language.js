@@ -1,4 +1,4 @@
-/* global localStorage */
+/* global localStorage, window */
 
 import { browserHistory } from 'react-router';
 import { Meteor } from 'meteor/meteor';

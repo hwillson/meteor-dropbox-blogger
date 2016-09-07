@@ -25,12 +25,12 @@ function pageTitle() {
   );
 }
 
-function renderNavItems(allFiles) {
+function renderNavItems(siteContent) {
   const navItems = [];
-  allFiles.forEach((page) => {
+  siteContent.forEach((page) => {
     if (!page.hidden) {
       navItems.push(
-        <LinkContainer to={{ pathname: `/${page.slug}` }} key={page._id}>
+        <LinkContainer to={{ pathname: `/${page.slug}` }} key={page.slug}>
           <NavItem>
             {page.title}
           </NavItem>
@@ -41,9 +41,9 @@ function renderNavItems(allFiles) {
   return navItems;
 }
 
-function renderNavigation(allFiles) {
+function renderNavigation(siteContent) {
   let navigation;
-  if (allFiles.length) {
+  if (siteContent.length) {
     navigation = (
       <Navbar className="navbar-dark">
         <Navbar.Header className="hidden-sm hidden-md hidden-lg">
@@ -54,7 +54,7 @@ function renderNavigation(allFiles) {
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav>
-            {renderNavItems(allFiles)}
+            {renderNavItems(siteContent)}
           </Nav>
           <div className="hidden-sm hidden-md hidden-lg">
             <LanguageDropdown />
@@ -66,7 +66,7 @@ function renderNavigation(allFiles) {
   return navigation;
 }
 
-const Header = ({ allFiles }) => (
+const Header = ({ siteContent }) => (
   <header>
     <Grid className="hidden-xs">
       <Row>
@@ -78,12 +78,12 @@ const Header = ({ allFiles }) => (
         </Col>
       </Row>
     </Grid>
-    {renderNavigation(allFiles)}
+    {renderNavigation(siteContent)}
   </header>
 );
 
 Header.propTypes = {
-  allFiles: React.PropTypes.array.isRequired,
+  siteContent: React.PropTypes.array.isRequired,
 };
 
 export default Header;

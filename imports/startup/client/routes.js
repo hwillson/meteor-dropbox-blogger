@@ -3,7 +3,7 @@
 import React from 'react';
 import { Router, Route, browserHistory } from 'react-router';
 
-import DefaultContainer from '../../ui/client/containers/DefaultContainer';
+import DefaultLayout from '../../ui/client/layouts/DefaultLayout';
 
 if (!localStorage.getItem('paxil_language')) {
   localStorage.setItem('paxil_language', 'en');
@@ -11,8 +11,8 @@ if (!localStorage.getItem('paxil_language')) {
 
 const renderRoutes = () => (
   <Router history={browserHistory}>
-    <Route path="/" component={DefaultContainer} />
-    <Route path="/:slug" component={DefaultContainer} />
+    <Route path="/" component={DefaultLayout} />
+    <Route path="/:slug" component={DefaultLayout} />
   </Router>
 );
 

@@ -27,6 +27,7 @@ class Page extends Component {
         internalLinks[i].onclick = (event) => {
           event.preventDefault();
           browserHistory.push(event.target.pathname);
+          window.scrollTo(0, 0);
         };
       }
     }
@@ -45,7 +46,7 @@ class Page extends Component {
         <div
           className="page"
           dangerouslySetInnerHTML={
-            HtmlContent.prepareForDisplay(this.props.page.content)
+            HtmlContent.prepareForDisplay(this.props.page)
           }
         />
       );
@@ -55,7 +56,7 @@ class Page extends Component {
 }
 
 Page.propTypes = {
-  page: React.PropTypes.object,
+  page: React.PropTypes.string,
 };
 
 export default Page;
