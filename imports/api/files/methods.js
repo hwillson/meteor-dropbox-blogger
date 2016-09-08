@@ -12,7 +12,7 @@ const loadSiteContent = new ValidatedMethod({
     let loadedContent = [];
     if (!this.isSimulation) {
       import redis from 'redis';
-      const redisClient = redis.createClient();
+      const redisClient = redis.createClient(process.env.REDIS_URL);
       const getKeys = Meteor.wrapAsync(redisClient.keys, redisClient);
       const getContent = Meteor.wrapAsync(redisClient.hgetall, redisClient);
       const keys = getKeys(`*${language}_*`);

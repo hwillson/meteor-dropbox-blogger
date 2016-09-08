@@ -11,10 +11,6 @@ const DropboxRedisSynch = (() => {
 
   // Pull all content files from dropbox, pushing them into redis
   publicApi.run = () => {
-    if (!process.env.DROPBOX_TOKEN) {
-      throw new Error(
-        'Uh oh - the DROPBOX_TOKEN environment variable is missing!');
-    }
     privateApi.pullFromDropboxSendToRedis();
   };
 
@@ -26,7 +22,7 @@ const DropboxRedisSynch = (() => {
     const dropboxApi = new Dropbox({
       accessToken: process.env.DROPBOX_TOKEN,
     });
-    const redisClient = redis.createClient();
+    const redisClient = redis.createClient(process.env.REDIS_URL);
 
     dropboxApi.filesListFolder({ path: '' }).then((response) => {
       if (response && response.entries) {
