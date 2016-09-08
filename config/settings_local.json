@@ -16,6 +16,9 @@
     }
   },
   "private": {
-    "cronEnabled": false
+    "cron": {
+      "enabled": false,
+      "schedule": "0 */5 * * * *"
+    }
   }
 }
