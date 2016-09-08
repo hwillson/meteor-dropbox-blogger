@@ -2,49 +2,103 @@
 
 # meteor-dropbox-blogger
 
-[Meteor](https://meteor.com) based blogging system that leverages [Dropbox](https://dropbox.com) for content management.
+[Meteor](https://meteor.com) based blogging system that leverages [Dropbox](https://dropbox.com) for content management, and [Redis](http://redis.io) for content delivery.
 
 ## Overview
 
-Super simple linear blogging system that pulls all site content from Dropbox, leveraging the Dropbox API via the [dropbox](https://www.npmjs.com/package/dropbox) npm package. Site content is stored in a configurable Dropbox location, with site pages stored as individual files. File names are used as site menu item names, and files prefixed with numbers (1_*, ...) will be sorted accordingly when showing the menu. Dropbox content changes are polled regularly (poll time is configurable), so content changes show up on the main published site automatically. [Prerender.io](https://prerender.io/) is configured for server side rendering (SEO).
+Super simple blogging system that pulls all site content from Dropbox, leveraging the Dropbox API via the [dropbox](https://www.npmjs.com/package/dropbox) npm package. Site content is stored in a configurable Dropbox location, with site pages stored as individual files. File names are used as site menu item names, and files prefixed with numbers will be sorted accordingly when showing the menu. Dropbox content changes are polled regularly (poll time is configurable), so content changes show up on the main published site automatically. [Prerender.io](https://prerender.io/) is configured for server side rendering (SEO).
+
+For performance (and to make sure we aren't hitting Dropbox's max allowed API requests within a certain timeframe), content pulled from Dropbox is stored within a Redis data store. All site content is served from Redis, while a Dropbox to Redis synch happens behind the scenes, at a configured interval.
 
 ## Prerequisites
 
-You will need a configured [Dropbox API app](https://www.dropbox.com/developers/apps). Make sure your configured app only has access to a single folder, and that you've generated an "access token".
+You will need a configured [Dropbox API app](https://www.dropbox.com/developers/apps). Make sure your configured app only has access to a single folder, and that you've generated an "access token". You will also need access to a Redis data store (for production, I recommend the Redis offering from [Compose](https://www.compose.com)).
 
 ## Running
 
 ### Development
 
-1. `git clone https://github.com/hwillson/meteor-dropbox-blogger.git`
-2. `cd meteor-dropbox-blogger; meteor npm install`
-3. Tweak any configuration items via `/config/settings_local.json`.
-4. Start the app: `DROPBOX_TOKEN="yourtokenhere" meteor --settings=config/settings_local.json`
+1. Make sure you've configured a Dropbox API app and known the app's token.
+2. Make sure you have a local Redis data store ready for use (for example, on MacOS you can install redis using `brew install redis`).
+3. `git clone https://github.com/hwillson/meteor-dropbox-blogger.git`
+4. `cd meteor-dropbox-blogger; meteor npm install`
+5. Tweak any configuration items via `/config/settings_local.json`.
+6. Start the app, making sure you define the needed `DROPBOX_TOKEN` and `REDIS_URL` environment variables: `DROPBOX_TOKEN="token" REDIS_URL="redis://localhost" meteor --settings=config/settings_local.json`
 
 ### Production
 
-TODO
-
-## Configuration
-
-Application configuration is controlled through `settings*.json` files, stored in `/config`. These settings are explained below:
+Deploy to your production Meteor host as you would normally, making sure your pointing to an updated production `settings.json` file, and have defined the `DROPBOX_TOKEN` and `REDIS_URL` environment variables. Here's a sample `settings.json` for [Galaxy](https://www.meteor.com/hosting):
 
 ```
 {
-  "public": {  
+  "galaxy.meteor.com": {
+    "env": {
+      "ROOT_URL": "https://www.someawesomeapp.yes",
+      "DROPBOX_TOKEN": "token",
+      "REDIS_URL": "redis://suer:pass@host:port"
+    }
+  },
+  "public": {
     "site": {
-      "title": "Awesome Site", [Your site title (shows in `head > title`)]
       "languages": [
-        { "en": "English" } [Available languages]
-      ]
-    }    
+        { "code": "en", "label": "English" },
+        { "code": "fr", "label": "French" }
+      ],
+      "title": {
+        "en": "English Site Title",
+        "fr": "French Site Title"
+      },
+      "home": {
+        "en": "home",
+        "fr": "accueil"
+      }
+    }
   },
   "private": {
-    "dropbox": {
-      "pollIntervalMs": 5000 [Dropbox content change poll interval in milliseconds]
+    "cron": {
+      "enabled": true,
+      "schedule": "0 */5 * * * *"
     }
   }
-}   
+}
+```
+
+## Configuration
+
+Application configuration is controlled through a `settings.json` file. An example development `settings_local.json` file can be found in `/config`. These settings are explained below:
+
+```
+{
+  "public": {
+    "site": {
+      // Available site languages; if more than one language is defined the site will 
+      // show a language selection dropdown in the header
+      "languages": [
+        { "code": "en", "label": "English" },
+        { "code": "fr", "label": "French" }
+      ],
+      // Site head title for each language
+      "title": {
+        "en": "Some Random Test Site [en]",
+        "fr": "Some Random Test Site [fr]"
+      },
+      // Home page slug (used to redirect during a language toggle)
+      "home": {
+        "en": "home",
+        "fr": "accueil"
+      }
+    }
+  },
+  "private": {
+    // Settings for the dropbox to redis synch process
+    "cron": {
+      // Enable/disable the synch process (true/false)
+      "enabled": false,
+      // Cron schedule; for example, run every 5 minutes
+      "schedule": "0 */5 * * * *"
+    }
+  }
+}
 ```
 
 ## Dropbox Files
