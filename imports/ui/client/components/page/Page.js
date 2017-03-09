@@ -1,4 +1,4 @@
-/* global document, window */
+/* global document, window, localStorage */
 
 import React, { Component } from 'react';
 import FontAwesome from 'react-fontawesome';
@@ -26,6 +26,12 @@ class Page extends Component {
       for (let i = 0; i < internalLinks.length; i++) {
         internalLinks[i].onclick = (event) => {
           event.preventDefault();
+          if (event.target.getAttribute('data-lang')) {
+            localStorage.setItem(
+              'paxil_language',
+              event.target.getAttribute('data-lang'),
+            );
+          }
           browserHistory.push(event.target.pathname);
           window.scrollTo(0, 0);
         };
